@@ -1,0 +1,64 @@
+create database supermaket
+use supermaket
+/*--------------------------------
+--------------------------------*/
+/*用户登录数据库*/
+/*drop table adminUsers
+select * from adminUsers*/
+create table adminUsers (
+	ID int primary key identity(1,1),
+	username varchar(10) not null,
+	userpassword varchar(20) not null
+);
+SET IDENTITY_INSERT adminUsers off;
+
+insert into adminUsers 
+(username,userpassword)
+values('zcwl','123')
+/*--------------------------------
+--------------------------------*/
+/*商品*/
+create table Goods(
+Gnum varchar(10) primary key,/*商品编号*/
+Gname varchar(10) not null,/*商品名称*/
+Gtype varchar(10) not null,/*商品类型*/
+Gprice money check(Gprice>=0),/*商品单价*/
+Gbid money check(Gbid>=0),/*商品成本*/
+Vnum varchar(10) not null,/*供应商编号*/
+foreign key(Vnum) references Vendor(Vnum)
+)
+insert into Goods 
+(Gnum,Gname,Gtype,Gprice,Gbid,Vnum) 
+values ('1','1','1',1,1,'1')
+
+/*select * from Goods*/
+/*--------------------------------
+--------------------------------*/
+/*供应商*/
+create table Vendor(
+Vnum varchar(10) primary key,/*编号*/
+Vname varchar(10) not null,/*供应商名称*/
+Vphone varchar(20) not null,/*供应商电话*/
+Vpalce varchar(10) not null/*供应商地点*/
+)
+insert into Vendor values (
+	'1','康师傅','12345678901','安阳市'
+),(
+	'2','白象','12345678901','北京市'
+)
+/*select * from Vendor*/
+
+/*--------------------------------
+--------------------------------
+会员*/
+create table Menber(
+Mnum varchar(10) primary key,/*会员卡号*/
+Mname varchar(10) not null,/*会员姓名*/
+Mphone varchar(20) not null,/*会员电话*/
+Mdate data,/*会员入会日期*/
+Mcip varchar),/*会员密码*/
+Mbalance money check(Mbalance>=0),/*剩余金额*/
+)
+/*drop table Menber*/
+/*--------------------------------
+--------------------------------*/
